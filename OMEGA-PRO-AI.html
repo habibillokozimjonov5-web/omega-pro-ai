@@ -92,17 +92,9 @@ header{flex-shrink:0;height:58px;display:flex;justify-content:space-between;alig
 .chip-bar.active{display:flex}
 .chip{padding:3px 9px;border-radius:12px;font-size:10px;cursor:pointer;white-space:nowrap;border:1px solid #222;color:#555;transition:all 0.2s;flex-shrink:0}
 .chip.on{color:var(--neon);border-color:var(--neon);background:rgba(0,229,255,0.05)}
-.chip.pink.on{color:#ff6bcb;border-color:#ff6bcb;background:rgba(255,107,203,0.05)}
-.chip.orange.on{color:#ff9500;border-color:#ff9500;background:rgba(255,149,0,0.05)}
-.chip.green.on{color:#00ff99;border-color:#00ff99;background:rgba(0,255,153,0.05)}
-.chip.yellow.on{color:#ffcc00;border-color:#ffcc00;background:rgba(255,204,0,0.05)}
 .tabs-nav{display:flex;overflow-x:auto;padding:6px 10px 8px;gap:5px;scrollbar-width:none}
 .tab-btn{flex:1;min-width:52px;text-align:center;font-family:'Orbitron',monospace;font-size:7px;letter-spacing:1px;color:#444;padding:7px 2px;background:#080808;border-radius:8px;cursor:pointer;border:1px solid transparent;transition:all 0.3s}
 .tab-btn.on{color:var(--neon);border-color:rgba(0,229,255,0.3);background:rgba(0,229,255,0.05)}
-.progress-bar-wrap{background:#111;border-radius:10px;height:5px;overflow:hidden;margin:6px 0}
-.progress-bar{height:100%;background:linear-gradient(90deg,var(--neon),var(--neon2));width:0%;transition:width 0.5s;border-radius:10px}
-.img-history{flex-shrink:0;display:flex;gap:8px;overflow-x:auto;padding:6px 12px;scrollbar-width:none;border-top:1px solid var(--border)}
-.img-hist-item{width:48px;height:48px;flex-shrink:0;border-radius:8px;object-fit:cover;border:1px solid var(--border);cursor:pointer}
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.97);z-index:5000;flex-direction:column}
 .modal.open{display:flex}
 .modal-top{flex-shrink:0;padding:13px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--bg)}
@@ -162,30 +154,16 @@ header{flex-shrink:0;height:58px;display:flex;justify-content:space-between;alig
       <div class="welcome"><h3>OMEGA CHAT</h3><p>ULTRA PRO · FAST · SMART · MINI<br>Rasmli savol · Suhbat xotirasi</p></div>
     </div></div>
   </div>
-  <!-- IMAGE -->
-  <div id="p2" class="page">
-    <div class="page-label">⬡ OMEGA IMAGE</div>
-    <div class="chat-scroll"><div id="chat2" class="chat-box">
-      <div class="welcome"><h3>OMEGA IMAGE</h3><p>AI rasm yaratish · O'zbekcha ✅<br>HD · Saqlash · Ulashish · Tarix</p></div>
-    </div></div>
-    <div id="imgHistory" class="img-history" style="display:none"></div>
-  </div>
-  <!-- VIDEO -->
-  <div id="p3" class="page">
-    <div class="page-label">⬡ OMEGA VIDEO</div>
-    <div class="chat-scroll"><div id="chat3" class="chat-box">
-      <div class="welcome"><h3>OMEGA VIDEO</h3><p>⚡ OMEGA VIDEO — tez, bepul, 1080p<br>🎬 OMEGA CINEMA — 4K, Kling AI</p></div>
-    </div></div>
-  </div>
+
   <!-- TRANSLATE -->
-  <div id="p4" class="page">
+  <div id="p2" class="page">
     <div class="page-label">⬡ OMEGA TRANSLATE</div>
     <div class="lang-row">
       <select id="l1" class="lang-select" onchange="updateDualLabels()"></select>
       <div class="swap-btn" onclick="swapLangs()">⇄</div>
       <select id="l2" class="lang-select" onchange="updateDualLabels()"></select>
     </div>
-    <div class="chat-scroll"><div id="chat4" class="chat-box">
+    <div class="chat-scroll"><div id="chat2" class="chat-box">
       <div class="welcome"><h3>OMEGA TRANSLATE</h3><p>Har kishi o'z tilida yozadi<br>Ikkalasi o'z tilida eshitadi 🔊</p></div>
     </div></div>
     <div class="dual-input">
@@ -236,61 +214,14 @@ header{flex-shrink:0;height:58px;display:flex;justify-content:space-between;alig
     <div class="chip" onclick="selM(this,'mixtral-8x7b-32768')">ULTRA SMART</div>
     <div class="chip" onclick="selM(this,'gemma2-9b-it')">ULTRA MINI</div>
   </div>
-  <div id="t2" class="tools-row">
-    <div class="icon-btn" onclick="improvePrompt()">✨</div>
-    <div class="input-pill"><input type="text" id="in2" placeholder="Rasm tavsifi..." onkeydown="if(event.key==='Enter')send(2)"></div>
-    <div class="send-btn" onclick="send(2)"><svg width="13" height="13" fill="black" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></div>
-  </div>
-  <div id="c2q" class="chip-bar">
-    <div class="chip green on" onclick="selQ(this,'normal',512)">Normal</div>
-    <div class="chip green" onclick="selQ(this,'hd',768)">HD</div>
-    <div class="chip green" onclick="selQ(this,'ultra',1024)">Ultra HD</div>
-  </div>
-  <div id="c2s" class="chip-bar">
-    <div class="chip pink on" onclick="selS(this,'realistic')">Realistic</div>
-    <div class="chip pink" onclick="selS(this,'anime')">Anime</div>
-    <div class="chip pink" onclick="selS(this,'oil painting')">Oil Paint</div>
-    <div class="chip pink" onclick="selS(this,'cyberpunk')">Cyberpunk</div>
-    <div class="chip pink" onclick="selS(this,'watercolor')">Watercolor</div>
-    <div class="chip pink" onclick="selS(this,'3d render')">3D Render</div>
-  </div>
-  <div id="c2z" class="chip-bar">
-    <div class="chip on" onclick="selZ(this,'1:1',512,512)">1:1</div>
-    <div class="chip" onclick="selZ(this,'16:9',1024,576)">16:9</div>
-    <div class="chip" onclick="selZ(this,'9:16',576,1024)">9:16</div>
-    <div class="chip" onclick="selZ(this,'4:3',768,576)">4:3</div>
-  </div>
-  <div id="t3" class="tools-row">
-    <div class="icon-btn" onclick="openVideoImg()">🖼️</div>
-    <div class="input-pill"><input type="text" id="in3" placeholder="Video tavsifi..." onkeydown="if(event.key==='Enter')send(3)"></div>
-    <div class="send-btn" onclick="send(3)"><svg width="13" height="13" fill="black" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></div>
-  </div>
-  <div id="c3v" class="chip-bar">
-    <div class="chip on" onclick="selVS(this,'cinematic')">Cinematic</div>
-    <div class="chip" onclick="selVS(this,'anime')">Anime</div>
-    <div class="chip" onclick="selVS(this,'cartoon')">Cartoon</div>
-    <div class="chip" onclick="selVS(this,'realistic')">Realistic</div>
-  </div>
-  <div id="c3e" class="chip-bar">
-    <div class="chip on" onclick="selEng(this,'omega')">⚡ OMEGA VIDEO</div>
-    <div class="chip orange" onclick="selEng(this,'cinema')">🎬 OMEGA CINEMA</div>
-  </div>
-  <div id="c3l" class="chip-bar">
-    <div class="chip yellow on" onclick="selVL(this,3)">3s</div>
-    <div class="chip yellow" onclick="selVL(this,5)">5s</div>
-    <div class="chip yellow" onclick="selVL(this,10)">10s</div>
-  </div>
   <div class="tabs-nav">
     <div class="tab-btn on" onclick="tabNav(1,this)">CHAT</div>
-    <div class="tab-btn" onclick="tabNav(2,this)">IMAGE</div>
-    <div class="tab-btn" onclick="tabNav(3,this)">VIDEO</div>
-    <div class="tab-btn" onclick="tabNav(4,this)">TRANSLATE</div>
+    <div class="tab-btn" onclick="tabNav(2,this)">TRANSLATE</div>
   </div>
 </div>
 
 <input type="file" id="galleryInput" accept="image/*" multiple style="display:none" onchange="galleryPick(event)">
 <input type="file" id="fileInput" accept="*/*" style="display:none" onchange="filePick(event)">
-<input type="file" id="videoImgInput" accept="image/*" style="display:none" onchange="videoImgPick(event)">
 <canvas id="snapCanvas" style="display:none"></canvas>
 
 <div id="memMod" class="modal">
@@ -298,7 +229,6 @@ header{flex-shrink:0;height:58px;display:flex;justify-content:space-between;alig
     <div class="modal-title">XOTIRA</div>
     <div style="display:flex;gap:10px;align-items:center">
       <button class="new-chat-btn" onclick="newChat()">+ YANGI</button>
-      <button class="new-chat-btn" onclick="resetKeys()" style="background:#ff3b3b">⚙️ KALIT</button>
       <div class="close-btn" onclick="closeModal('memMod')">×</div>
     </div>
   </div>
@@ -330,22 +260,15 @@ header{flex-shrink:0;height:58px;display:flex;justify-content:space-between;alig
 </div>
 
 <script>
-const GROQ_KEY   = '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';
-const GEMINI_KEY = 'AIzaSyDRDynvOoosCzbnpEr-13JaORuI5wgqgb8';
-const HF_KEY     = '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';
-
-
+const GROQ_KEY = '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';
 
 const AI_SYSTEM = `Siz OMEGA PRO AI yordamchisisiz. Sizni Habibillo Kozimjonov yaratgan.
 Foydalanuvchi qaysi tilda yozsa, o'sha tilda javob bering.
 Faqat "kim yaratgan" deb so'rashganda aytasiz.
 Qisqa va foydali javob bering.`;
 
-let chatHistory=[],selectedImages=[],selectedVideoImg=null;
+let chatHistory=[],selectedImages=[];
 let curModel='llama-3.3-70b-versatile';
-let imgStyle='realistic',imgW=512,imgH=512,imgQ='normal',imgR='1:1';
-let imgHistory=[];
-let videoStyle='cinematic',videoLen=3,videoEngine='omega';
 let liveVoiceLang='uz-UZ',liveHistory=[];
 let lastTr=[null,null];
 let memList=JSON.parse(localStorage.getItem('omega_mem')||'[]');
@@ -382,7 +305,6 @@ window.onload=()=>{
   updateDualLabels();
   buildLiveLangChips();
   renderMem();
-  
   document.addEventListener('click',e=>{if(plusOpen&&!e.target.closest('#plusMenu')&&!e.target.closest('#plusBtn'))closePlus();});
 };
 
@@ -392,25 +314,17 @@ function tabNav(n,el){
   document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('on'));
   el.classList.add('on');
   document.querySelectorAll('.tools-row').forEach(x=>x.classList.remove('active'));
-  if(n!==4)document.getElementById('t'+n).classList.add('active');
+  if(n===1) document.getElementById('t1').classList.add('active');
   document.querySelectorAll('.chip-bar').forEach(x=>x.classList.remove('active'));
-  if(n===1)document.getElementById('c1').classList.add('active');
-  if(n===2){['c2q','c2s','c2z'].forEach(id=>document.getElementById(id).classList.add('active'));}
-  if(n===3){['c3v','c3e','c3l'].forEach(id=>document.getElementById(id).classList.add('active'));}
+  if(n===1) document.getElementById('c1').classList.add('active');
   closePlus();
 }
+
 function openModal(id){document.getElementById(id).classList.add('open')}
 function closeModal(id){document.getElementById(id).classList.remove('open')}
 function togglePlus(){plusOpen=!plusOpen;document.getElementById('plusMenu').classList.toggle('open',plusOpen);document.getElementById('plusBtn').classList.toggle('active',plusOpen);}
 function closePlus(){plusOpen=false;document.getElementById('plusMenu').classList.remove('open');document.getElementById('plusBtn').classList.remove('active');}
-
-function selM(el,m){document.querySelectorAll('#c1 .chip').forEach(x=>x.classList.remove('on'));el.classList.add('on');curModel=m}
-function selS(el,s){document.querySelectorAll('#c2s .chip').forEach(x=>x.classList.remove('on'));el.classList.add('on');imgStyle=s}
-function selZ(el,r,w,h){document.querySelectorAll('#c2z .chip').forEach(x=>x.classList.remove('on'));el.classList.add('on');imgR=r;imgW=w;imgH=h}
-function selQ(el,q,s){document.querySelectorAll('#c2q .chip').forEach(x=>x.classList.remove('on'));el.classList.add('on');imgQ=q;if(imgR==='1:1'){imgW=s;imgH=s;}}
-function selVS(el,s){document.querySelectorAll('#c3v .chip').forEach(x=>x.classList.remove('on'));el.classList.add('on');videoStyle=s}
-function selVL(el,l){document.querySelectorAll('#c3l .chip').forEach(x=>x.classList.remove('on'));el.classList.add('on');videoLen=l}
-function selEng(el,e){document.querySelectorAll('#c3e .chip').forEach(x=>x.classList.remove('on'));el.classList.add('on');videoEngine=e}
+function selM(el,m){document.querySelectorAll('#c1 .chip').forEach(x=>x.classList.remove('on'));el.classList.add('on');curModel=m;}
 function swapLangs(){const a=document.getElementById('l1'),b=document.getElementById('l2'),t=a.value;a.value=b.value;b.value=t;updateDualLabels();}
 
 function updateDualLabels(){
@@ -418,8 +332,10 @@ function updateDualLabels(){
   const l1=LANGS.find(l=>l.c===c1)||LANGS[0],l2=LANGS.find(l=>l.c===c2)||LANGS[1];
   document.getElementById('lbl1').textContent=l1.n;
   document.getElementById('lbl2').textContent=l2.n;
-  rebuildIn('din1',l1);rebuildIn('din2',l2);
+  rebuildIn('din1',l1);
+  rebuildIn('din2',l2);
 }
+
 function rebuildIn(id,lang){
   const old=document.getElementById(id);if(!old)return;
   const val=old.value;
@@ -433,6 +349,7 @@ function rebuildIn(id,lang){
   inp.addEventListener('keydown',e=>{if(e.key==='Enter')dualSend(side);});
   old.parentNode.replaceChild(inp,old);
 }
+
 function openVKB(side){
   vkbTarget=side;
   const cur=document.getElementById('l'+side).value;
@@ -444,13 +361,13 @@ function openVKB(side){
     </div>`).join('');
   document.getElementById('vkbMod').classList.add('open');
 }
-function closeVKB(){document.getElementById('vkbMod').classList.remove('open')}
+function closeVKB(){document.getElementById('vkbMod').classList.remove('open');}
 function selectVKBLang(code){document.getElementById('l'+vkbTarget).value=code;updateDualLabels();closeVKB();}
 function replayTr(side){if(lastTr[side-1]){const{text,lang}=lastTr[side-1];speakTxt(text,lang);}}
 
 function newChat(){
-  chatHistory=[];selectedImages=[];selectedVideoImg=null;
-  [1,2,3,4].forEach(n=>{const c=document.getElementById('chat'+n);if(c)c.innerHTML='';});
+  chatHistory=[];selectedImages=[];
+  [1,2].forEach(n=>{const c=document.getElementById('chat'+n);if(c)c.innerHTML='';});
   renderPreviews();closeModal('memMod');
 }
 
@@ -463,9 +380,7 @@ async function openCamera(){
     document.body.appendChild(video);
     const ui=document.createElement('div');
     ui.style.cssText='position:fixed;bottom:0;width:100%;padding:25px 20px;display:flex;justify-content:space-around;align-items:center;background:linear-gradient(transparent,rgba(0,0,0,0.85));z-index:8001';
-    ui.innerHTML=`<span style="color:white;cursor:pointer" onclick="document.getElementById('galleryInput').click()">📁 Galereya</span>
-      <div style="width:65px;height:65px;border-radius:50%;background:white;border:4px solid rgba(255,255,255,0.3);cursor:pointer" id="shutterBtn"></div>
-      <span style="color:#ff3b3b;cursor:pointer" id="camClose">✕</span>`;
+    ui.innerHTML='<span style="color:white;cursor:pointer" onclick="document.getElementById(\'galleryInput\').click()">📁 Galereya</span><div style="width:65px;height:65px;border-radius:50%;background:white;border:4px solid rgba(255,255,255,0.3);cursor:pointer" id="shutterBtn"></div><span style="color:#ff3b3b;cursor:pointer" id="camClose">✕</span>';
     document.body.appendChild(ui);
     document.getElementById('shutterBtn').onclick=()=>{
       const c=document.getElementById('snapCanvas');
@@ -478,26 +393,22 @@ async function openCamera(){
     document.getElementById('camClose').onclick=()=>{stream.getTracks().forEach(t=>t.stop());document.body.removeChild(video);document.body.removeChild(ui);};
   }catch(e){alert('Kamera ruxsati kerak');}
 }
-function openGallery(){document.getElementById('galleryInput').click()}
-function openFile(){document.getElementById('fileInput').click()}
-function openVideoImg(){document.getElementById('videoImgInput').click()}
+function openGallery(){document.getElementById('galleryInput').click();}
+function openFile(){document.getElementById('fileInput').click();}
 function galleryPick(e){for(const f of e.target.files){if(selectedImages.length>=10)break;const r=new FileReader();r.onload=ev=>{selectedImages.push(ev.target.result);renderPreviews();};r.readAsDataURL(f);}}
 function filePick(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{selectedImages.push(ev.target.result);renderPreviews();addMsg(document.getElementById('chat1'),`📎 <b>${esc(f.name)}</b>`,'user');};r.readAsDataURL(f);}
-function videoImgPick(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{selectedVideoImg=ev.target.result;addMsg(document.getElementById('chat3'),`🖼️ <b>${esc(f.name)}</b><br><img src="${ev.target.result}" style="width:80px;border-radius:8px;margin-top:6px">`,'user');};r.readAsDataURL(f);}
 function renderPreviews(){document.getElementById('pRow1').innerHTML=selectedImages.map((img,i)=>`<div class="preview-item"><img src="${img}"><div class="del-img" onclick="selectedImages.splice(${i},1);renderPreviews()">×</div></div>`).join('');}
 
 async function send(n){
   const inp=document.getElementById('in'+n),chat=document.getElementById('chat'+n);
   const text=inp.value.trim();
-  if(!text&&(n!==1||!selectedImages.length))return;
+  if(!text&&!selectedImages.length)return;
   let html='';
-  if(n===1&&selectedImages.length)html+=`<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px">`+selectedImages.map(i=>`<img src="${i}" style="width:68px;border-radius:8px;">`).join('')+`</div>`;
+  if(selectedImages.length)html+=`<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px">`+selectedImages.map(i=>`<img src="${i}" style="width:68px;border-radius:8px;">`).join('')+`</div>`;
   if(text)html+=esc(text);
   addMsg(chat,html,'user');inp.value='';
   const imgs=[...selectedImages];selectedImages=[];renderPreviews();
-  if(n===1)await doGroq(chat,text,imgs);
-  else if(n===2)await doImage(chat,text);
-  else if(n===3)await doVideo(chat,text);
+  await doGroq(chat,text,imgs);
 }
 
 async function dualSend(side){
@@ -505,7 +416,7 @@ async function dualSend(side){
   const tc=side===1?document.getElementById('l2').value:document.getElementById('l1').value;
   const inp=document.getElementById('din'+side);
   const text=inp.value.trim();if(!text)return;
-  const chat=document.getElementById('chat4');
+  const chat=document.getElementById('chat2');
   const fl=LANGS.find(l=>l.c===fc)||LANGS[0];
   addMsg(chat,`<span style="font-size:10px;color:#888">👤 ${side} (${fl.n})</span><br>${esc(text)}`,'user');
   inp.value='';
@@ -522,8 +433,8 @@ function addTyping(chat){
   const d=document.createElement('div');d.className='typing';d.id='tp_'+Date.now();d.innerHTML='<span></span><span></span><span></span>';
   chat.appendChild(d);const sc=chat.closest('.chat-scroll');if(sc)sc.scrollTop=sc.scrollHeight;return d.id;
 }
-function rmTyping(id){const e=document.getElementById(id);if(e)e.remove()}
-function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function rmTyping(id){const e=document.getElementById(id);if(e)e.remove();}
+function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function md(t){
   return t.replace(/```([\s\S]*?)```/g,'<pre><code>$1</code></pre>').replace(/`([^`]+)`/g,'<code>$1</code>')
     .replace(/^### (.+)$/gm,'<h3>$1</h3>').replace(/^## (.+)$/gm,'<h2>$1</h2>').replace(/^# (.+)$/gm,'<h1>$1</h1>')
@@ -546,152 +457,11 @@ async function doGroq(chat,text,imgs=[]){
     if(data.choices?.[0]){
       const reply=data.choices[0].message.content;
       chatHistory.push({role:'assistant',content:reply});
-      addMsg(chat,md(esc(reply)),'ai');saveMem(typeof uc==='string'?uc:'[Rasm]',reply);
+      addMsg(chat,md(esc(reply)),'ai');
+      saveMem(typeof uc==='string'?uc:'[Rasm]',reply);
     }else addMsg(chat,'⚠️ '+(data.error?.message||'Xato'),'ai');
-  }catch(e){rmTyping(tid);addMsg(chat,'⚠️ '+e.message,'ai')}
+  }catch(e){rmTyping(tid);addMsg(chat,'⚠️ '+e.message,'ai');}
 }
-
-async function doImage(chat,prompt){
-  if(!prompt)return;
-  const tid=addTyping(chat);
-  let engPrompt=prompt;
-  try{
-    const tr=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(prompt)+'&langpair=uz|en');
-    const td=await tr.json();
-    if(td.responseStatus===200&&td.responseData.translatedText!==prompt)engPrompt=td.responseData.translatedText;
-  }catch(e){}
-  const full=`${engPrompt}, ${imgStyle} style, high quality, highly detailed`;
-  const wid='iw_'+Date.now();
-  rmTyping(tid);
-  const d=document.createElement('div');d.className='ai-msg';
-  d.innerHTML=`<div style="font-size:11px;color:var(--neon);opacity:0.7;margin-bottom:6px">📐 ${imgR} · ${imgStyle} · ${imgQ.toUpperCase()}</div>
-    <div id="${wid}" style="min-height:120px;background:#111;border-radius:12px;display:flex;align-items:center;justify-content:center"><div style="color:var(--dim);font-size:12px">⏳ Yaratilmoqda...</div></div>
-    <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap" id="btns_${wid}"></div>`;
-  const t=document.createElement('div');t.className='msg-time';t.textContent=new Date().toLocaleTimeString('uz-UZ',{hour:'2-digit',minute:'2-digit'});
-  d.appendChild(t);chat.appendChild(d);
-  const sc=chat.closest('.chat-scroll');if(sc)sc.scrollTop=sc.scrollHeight;
-  try{
-    const ar=imgR==='16:9'?'16:9':imgR==='9:16'?'9:16':imgR==='4:3'?'4:3':'1:1';
-    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-001:predict?key=${GEMINI_KEY}`,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({instances:[{prompt:full}],parameters:{sampleCount:1,aspectRatio:ar}})
-    });
-    const data=await res.json();
-    if(data.predictions?.[0]?.bytesBase64Encoded){
-      const b64=data.predictions[0].bytesBase64Encoded;
-      const imgUrl='data:image/png;base64,'+b64;
-      const wrap=document.getElementById(wid);
-      if(wrap){const img=document.createElement('img');img.src=imgUrl;img.style.cssText='width:100%;border-radius:12px;border:1px solid var(--border);display:block';wrap.innerHTML='';wrap.appendChild(img);}
-      const btns=document.getElementById('btns_'+wid);
-      if(btns)btns.innerHTML=`<span style="color:var(--neon);font-size:12px;cursor:pointer" onclick="dlImg('${b64}')">⬇️ Saqlash</span><span style="color:#aaa;font-size:12px;cursor:pointer" onclick="shareImg('data:image/png;base64,${b64}')">↗️ Ulashish</span><span style="color:#aaa;font-size:12px;cursor:pointer" onclick="regenImg('${encodeURIComponent(full)}','${wid}')">🔄 Qayta</span>`;
-      imgHistory.unshift({url:imgUrl,prompt});if(imgHistory.length>20)imgHistory.pop();renderImgHistory();
-    }else{
-      const wrap=document.getElementById(wid);
-      if(wrap)wrap.innerHTML=`<div style="color:#ff3b3b;font-size:12px;padding:10px">⚠️ ${esc(data.error?.message||'Rasm yaratilmadi')}</div>`;
-    }
-  }catch(e){const wrap=document.getElementById(wid);if(wrap)wrap.innerHTML=`<div style="color:#ff3b3b;font-size:12px;padding:10px">⚠️ ${e.message}</div>`;}
-}
-
-function dlImg(b64){const a=document.createElement('a');a.href='data:image/png;base64,'+b64;a.download='omega-image.png';a.click();}
-function shareImg(url){if(navigator.share)navigator.share({title:'OMEGA PRO AI',url});else alert('Saqlash tugmasini ishlating');}
-async function regenImg(ep,wid){
-  const wrap=document.getElementById(wid);
-  if(wrap)wrap.innerHTML="<div style='color:var(--dim);font-size:12px'>⏳ Qayta yaratilmoqda...</div>";
-  try{
-    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent?key=${GEMINI_KEY}`,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({contents:[{parts:[{text:decodeURIComponent(ep)}]}],generationConfig:{responseModalities:['TEXT','IMAGE']}})
-    });
-    const data=await res.json();
-    let b64=null;
-    if(data.candidates?.[0]?.content?.parts){
-      for(const part of data.candidates[0].content.parts){
-        if(part.inlineData?.data){b64=part.inlineData.data;break;}
-      }
-    }
-    if(b64){
-      const img=document.createElement('img');img.src='data:image/png;base64,'+b64;
-      img.style.cssText='width:100%;border-radius:12px;border:1px solid var(--border);display:block';
-      if(wrap){wrap.innerHTML='';wrap.appendChild(img);}
-    }else{
-      if(wrap)wrap.innerHTML="<div style='color:#ff3b3b;font-size:12px;padding:10px'>⚠️ Qayta yaratishda xato</div>";
-    }
-  }catch(e){if(wrap)wrap.innerHTML=`<div style="color:#ff3b3b;font-size:12px;padding:10px">⚠️ ${e.message}</div>`;}
-}
-async function improvePrompt(){
-  const inp=document.getElementById('in2');if(!inp.value)return;
-  inp.placeholder='Yaxshilanmoqda...';
-  try{
-    const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
-      method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_KEY},
-      body:JSON.stringify({model:'llama-3.1-8b-instant',messages:[{role:'user',content:`Improve this AI image prompt in English, more detailed. Reply ONLY with prompt: "${inp.value}"`}],max_tokens:150})
-    });
-    const data=await res.json();
-    if(data.choices?.[0])inp.value=data.choices[0].message.content.replace(/^"|"$/g,'').trim();
-  }catch(e){}
-  inp.placeholder='Rasm tavsifi...';
-}
-function renderImgHistory(){
-  const h=document.getElementById('imgHistory');
-  if(!imgHistory.length){h.style.display='none';return;}
-  h.style.display='flex';
-  h.innerHTML=imgHistory.map(i=>`<img class="img-hist-item" src="${i.url}" title="${esc(i.prompt)}" onclick="document.getElementById('in2').value='${esc(i.prompt)}'" onerror="this.style.display='none'">`).join('');
-}
-
-async function doVideo(chat,prompt){
-  if(!prompt)return;
-  if(videoEngine==='cinema'){
-    addMsg(chat,`<div>🎬 <b>OMEGA CINEMA</b></div>
-      <div style="font-size:12px;color:#aaa;margin:6px 0">Kling AI da 4K video yaratish:</div>
-      <a href="https://klingai.com" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#ff9500,#ff6b00);color:black;padding:8px 16px;border-radius:10px;font-size:13px;font-weight:bold;text-decoration:none">🔗 Kling AI →</a>
-      <div style="font-size:11px;color:#555;margin-top:6px">Kuniga 66 kredit · 4K/60fps · 15 sekund</div>`,'ai');
-    return;
-  }
-  const pid='pv_'+Date.now();
-  const d=document.createElement('div');d.className='ai-msg';d.id=pid;
-  d.innerHTML=`<div>⚡ <b>OMEGA VIDEO</b> · ${esc(prompt)}</div>
-    <div style="font-size:11px;color:#555;margin:4px 0" id="vst_${pid}">⏳ Server tekshirilmoqda...</div>
-    <div class="progress-bar-wrap"><div class="progress-bar" id="pb_${pid}"></div></div>
-    <div id="pt_${pid}" style="font-size:11px;color:var(--neon);margin-top:3px">0%</div>`;
-  const t=document.createElement('div');t.className='msg-time';t.textContent=new Date().toLocaleTimeString('uz-UZ',{hour:'2-digit',minute:'2-digit'});
-  d.appendChild(t);chat.appendChild(d);
-  const sc=chat.closest('.chat-scroll');if(sc)sc.scrollTop=sc.scrollHeight;
-  let pct=0;
-  const iv=setInterval(()=>{pct+=Math.random()*5;if(pct>=92)pct=92;const pb=document.getElementById('pb_'+pid),pt=document.getElementById('pt_'+pid);if(pb)pb.style.width=pct+'%';if(pt)pt.textContent=Math.floor(pct)+'%';},1500);
-  const vst=document.getElementById('vst_'+pid);
-  if(vst)vst.textContent='⏳ Iltimos kuting, taxminan 3-5 daqiqa...';
-  try{
-    const body=selectedVideoImg
-      ?{inputs:selectedVideoImg}
-      :{inputs:`${prompt}, ${videoStyle} style, high quality`};
-    const res=await fetch('https://api-inference.huggingface.co/models/cerspense/zeroscope_v2_576w',{
-      method:'POST',
-      headers:{'Authorization':'Bearer '+HF_KEY,'Content-Type':'application/json'},
-      body:JSON.stringify(body)
-    });
-    clearInterval(iv);
-    const pb=document.getElementById('pb_'+pid),pt=document.getElementById('pt_'+pid);
-    if(pb)pb.style.width='100%';if(pt)pt.textContent='100% ✅';
-    if(res.ok){
-      const blob=await res.blob(),vurl=URL.createObjectURL(blob);
-      const el=document.getElementById(pid);
-      if(el)el.innerHTML+=`<video src="${vurl}" controls style="max-width:100%;border-radius:10px;margin-top:8px;border:1px solid var(--border)"></video>
-        <div style="margin-top:6px;display:flex;gap:10px">
-          <a href="${vurl}" download="omega.mp4" style="color:var(--neon);font-size:12px">⬇️ Yuklab olish</a>
-        </div>`;
-    }else{
-      const el=document.getElementById(pid);
-      const errData=await res.json().catch(()=>({}));
-      const msg=errData.error||'Video yaratilmadi';
-      if(el)el.innerHTML+=`<div style="color:#ff3b3b;font-size:12px;margin-top:6px">⚠️ ${esc(msg)}<br><span style="color:var(--neon);cursor:pointer" onclick="retryVideo('${esc(prompt)}')">🔄 Qayta urinish</span></div>`;
-    }
-  }catch(e){
-    clearInterval(iv);
-    const el=document.getElementById(pid);
-    if(el)el.innerHTML+=`<div style="color:#ff3b3b;font-size:12px;margin-top:6px">⚠️ ${e.message}<br><span style="color:var(--neon);cursor:pointer" onclick="retryVideo('${esc(prompt)}')">🔄 Qayta urinish</span></div>`;
-  }
-}
-function retryVideo(p){document.getElementById('in3').value=p;send(3);}
 
 async function doTranslate(chat,text,from,to,side){
   const tid=addTyping(chat);
@@ -738,6 +508,7 @@ function startLive(e){
     document.getElementById('liveOrb').classList.add('active');
   }).catch(()=>{document.getElementById('liveText').textContent='Mikrofon ruxsati berilmadi';});
 }
+
 function stopLive(e){
   if(e)e.preventDefault();
   if(liveRec){liveRec.stop();liveRec=null;}
@@ -769,6 +540,7 @@ function stopLive(e){
     }else document.getElementById('liveText').textContent='Bosib ushlab gapiring...';
   },400);
 }
+
 function renderLiveHistory(){
   document.getElementById('liveHistory').innerHTML=liveHistory.map(h=>`
     <div class="live-hist-item">
@@ -794,32 +566,5 @@ function renderMem(){
     </div>`).join('');
 }
 </script>
-
-<!-- SETUP MODAL -->
-<div id="setupModal" class="modal">
-  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:24px;gap:16px">
-    <div style="font-family:Orbitron,monospace;font-size:18px;font-weight:900;color:var(--neon);text-shadow:0 0 20px rgba(0,229,255,0.5);letter-spacing:3px">OMEGA PRO AI</div>
-    <div style="font-family:Orbitron,monospace;font-size:9px;color:var(--dim);letter-spacing:3px;margin-top:-10px">v4.0 · SETUP</div>
-    <div style="width:100%;max-width:340px;display:flex;flex-direction:column;gap:12px">
-      <div>
-        <div style="font-size:11px;color:var(--neon);margin-bottom:6px;opacity:0.8">🔑 GROQ API KALIT *</div>
-        <input id="setupGroq" type="password" placeholder="gsk_..." style="width:100%;background:#0d0d1a;border:1px solid rgba(0,229,255,0.3);border-radius:10px;padding:10px 14px;color:white;font-family:Rajdhani,sans-serif;font-size:14px;outline:none">
-        <div style="font-size:10px;color:#444;margin-top:4px">console.groq.com → bepul kalit</div>
-      </div>
-      <div>
-        <div style="font-size:11px;color:var(--neon);margin-bottom:6px;opacity:0.8">🔑 GEMINI API KALIT *</div>
-        <input id="setupGemini" type="password" placeholder="AIza..." style="width:100%;background:#0d0d1a;border:1px solid rgba(0,229,255,0.3);border-radius:10px;padding:10px 14px;color:white;font-family:Rajdhani,sans-serif;font-size:14px;outline:none">
-        <div style="font-size:10px;color:#444;margin-top:4px">aistudio.google.com → bepul kalit</div>
-      </div>
-      <div>
-        <div style="font-size:11px;color:#aaa;margin-bottom:6px;opacity:0.8">🔑 HUGGING FACE KALIT (ixtiyoriy)</div>
-        <input id="setupHf" type="password" placeholder="hf_..." style="width:100%;background:#0d0d1a;border:1px solid #222;border-radius:10px;padding:10px 14px;color:white;font-family:Rajdhani,sans-serif;font-size:14px;outline:none">
-        <div style="font-size:10px;color:#444;margin-top:4px">huggingface.co → video uchun</div>
-      </div>
-      <button onclick="saveKeys()" style="background:linear-gradient(135deg,var(--neon),var(--neon2));color:black;border:none;padding:14px;border-radius:12px;font-family:Orbitron,monospace;font-size:11px;font-weight:700;letter-spacing:2px;cursor:pointer;margin-top:4px">BOSHLASH →</button>
-      <div style="font-size:10px;color:#333;text-align:center">Kalitlar faqat telefongizda saqlanadi · Hech kim ko'rmaydi 🔒</div>
-    </div>
-  </div>
-</div>
 </body>
 </html>
