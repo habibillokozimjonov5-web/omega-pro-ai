@@ -21,9 +21,6 @@ header{flex-shrink:0;height:58px;display:flex;justify-content:space-between;alig
 .mem-btn{display:flex;flex-direction:column;gap:4px;cursor:pointer;padding:4px}
 .mem-btn span{display:block;height:2px;background:var(--neon);border-radius:2px}
 .mem-btn span:nth-child(1){width:20px}.mem-btn span:nth-child(2){width:14px}.mem-btn span:nth-child(3){width:17px}
-.voice-waves{display:flex;gap:3px;align-items:center;cursor:pointer;height:26px}
-.voice-waves span{width:4px;background:var(--neon);border-radius:2px;animation:wave 1.2s ease-in-out infinite}
-.voice-waves span:nth-child(1){height:10px;animation-delay:0s}.voice-waves span:nth-child(2){height:22px;animation-delay:0.2s}.voice-waves span:nth-child(3){height:14px;animation-delay:0.4s}.voice-waves span:nth-child(4){height:24px;animation-delay:0.1s}.voice-waves span:nth-child(5){height:10px;animation-delay:0.3s}
 .main{flex:1;min-height:0;position:relative;z-index:1;overflow:hidden}
 .page{display:none;flex-direction:column;height:100%;overflow:hidden}
 .page.active{display:flex}
@@ -102,24 +99,6 @@ header{flex-shrink:0;height:58px;display:flex;justify-content:space-between;alig
 .close-btn{font-size:28px;color:var(--neon);cursor:pointer;line-height:1}
 .new-chat-btn{background:linear-gradient(135deg,var(--neon),var(--neon2));color:black;border:none;padding:7px 13px;border-radius:8px;font-family:'Orbitron',monospace;font-size:8px;font-weight:700;letter-spacing:1px;cursor:pointer}
 .modal-body{flex:1;overflow-y:auto;padding:14px}
-#voiceLiveMod{justify-content:center;align-items:center;gap:0}
-.live-modal-inner{display:flex;flex-direction:column;align-items:center;gap:16px;padding:20px;overflow-y:auto;width:100%}
-.live-orb{width:160px;height:160px;border-radius:50%;border:3px solid var(--neon);box-shadow:0 0 40px rgba(0,229,255,0.3);display:flex;align-items:center;justify-content:center;position:relative;transition:box-shadow 0.3s;flex-shrink:0}
-.live-orb.active{box-shadow:0 0 60px rgba(0,229,255,0.6)}
-.live-orb::before{content:'';position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(0,229,255,0.2);animation:pulse-ring 2s infinite}
-.live-waves{display:flex;gap:5px;align-items:center;height:55px}
-.live-waves span{width:6px;background:var(--neon);border-radius:4px;animation:wave 1s ease-in-out infinite}
-.live-waves span:nth-child(1){height:14px;animation-delay:0s}.live-waves span:nth-child(2){height:42px;animation-delay:0.2s}.live-waves span:nth-child(3){height:22px;animation-delay:0.1s}.live-waves span:nth-child(4){height:35px;animation-delay:0.3s}.live-waves span:nth-child(5){height:16px;animation-delay:0.15s}
-.live-lang-chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;max-width:300px}
-.live-lang-chip{padding:4px 10px;border-radius:12px;font-size:10px;cursor:pointer;border:1px solid #333;color:#555;transition:all 0.2s;white-space:nowrap}
-.live-lang-chip.on{color:var(--neon);border-color:var(--neon);background:rgba(0,229,255,0.05)}
-.hold-btn{width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,var(--neon),var(--neon2));display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:9px;font-weight:700;color:black;cursor:pointer;user-select:none;letter-spacing:1px;flex-shrink:0}
-.hold-btn.rec{background:#ff3b3b;animation:pulse-btn 0.8s infinite}
-#liveText{color:var(--neon);font-size:13px;text-align:center;padding:0 20px;min-height:20px;opacity:0.8;max-width:300px}
-#liveStatus{font-size:11px;color:var(--dim);text-align:center}
-.live-hist-item{border:1px solid #1a1a2e;border-radius:10px;padding:10px;margin-bottom:8px;background:var(--bg2);width:100%}
-.live-hist-q{color:var(--neon);font-size:12px;margin-bottom:4px}
-.live-hist-a{color:#888;font-size:12px}
 .mem-item{border:1px solid #1a1a2e;border-radius:12px;padding:12px;margin-bottom:10px;background:var(--bg2)}
 .mem-item-time{font-size:10px;color:#444;margin-bottom:5px}
 .mem-item-q{color:var(--neon);font-size:13px;margin-bottom:4px}
@@ -141,7 +120,7 @@ header{flex-shrink:0;height:58px;display:flex;justify-content:space-between;alig
   </div>
   <div class="header-right">
     <div class="mem-btn" onclick="openModal('memMod')"><span></span><span></span><span></span></div>
-    <div class="voice-waves" onclick="openModal('voiceLiveMod')"><span></span><span></span><span></span><span></span><span></span></div>
+
   </div>
 </header>
 
@@ -234,22 +213,10 @@ header{flex-shrink:0;height:58px;display:flex;justify-content:space-between;alig
   </div>
   <div class="modal-body" id="memList"></div>
 </div>
-
-<div id="voiceLiveMod" class="modal">
-  <div class="modal-top">
-    <div class="modal-title">LIVE VOICE</div>
-    <div class="close-btn" onclick="closeModal('voiceLiveMod')">×</div>
   </div>
-  <div class="live-modal-inner">
-    <div class="live-orb" id="liveOrb"><div class="live-waves"><span></span><span></span><span></span><span></span><span></span></div></div>
-    <div id="liveText">Bosib ushlab gapiring...</div>
-    <div id="liveStatus"></div>
-    <div class="live-lang-chips" id="liveLangChips"></div>
-    <div class="hold-btn" id="holdBtn" ontouchstart="startLive(event)" ontouchend="stopLive(event)" onmousedown="startLive(event)" onmouseup="stopLive(event)">HOLD</div>
     <div style="font-size:11px;color:#333;text-align:center">Bosib ushlab gapiring · Qo'yib yuborsangiz AI javob beradi</div>
     <div style="width:100%;max-width:340px">
       <div style="font-family:Orbitron,monospace;font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:8px">TARIX</div>
-      <div id="liveHistory"></div>
     </div>
   </div>
 </div>
@@ -269,10 +236,10 @@ Qisqa va foydali javob bering.`;
 
 let chatHistory=[],selectedImages=[];
 let curModel='llama-3.3-70b-versatile';
-let liveVoiceLang='uz-UZ',liveHistory=[];
+
 let lastTr=[null,null];
 let memList=JSON.parse(localStorage.getItem('omega_mem')||'[]');
-let vkbTarget=1,plusOpen=false,liveRec=null;
+let vkbTarget=1,plusOpen=false;
 
 const LANGS=[
   {n:"🇺🇿 O'zbek",c:'uz',ph:"Yozing...",sp:'uz-UZ'},
@@ -303,7 +270,6 @@ window.onload=()=>{
   document.getElementById('l1').value='uz';
   document.getElementById('l2').value='ru';
   updateDualLabels();
-  buildLiveLangChips();
   renderMem();
   document.addEventListener('click',e=>{if(plusOpen&&!e.target.closest('#plusMenu')&&!e.target.closest('#plusBtn'))closePlus();});
 };
@@ -483,70 +449,6 @@ function speakTxt(text,lang){
   speechSynthesis.cancel();
   const u=new SpeechSynthesisUtterance(text.replace(/<[^>]+>/g,''));
   u.lang=lang;u.rate=0.95;speechSynthesis.speak(u);
-}
-
-function buildLiveLangChips(){
-  document.getElementById('liveLangChips').innerHTML=LANGS.slice(0,8).map(l=>`
-    <div class="live-lang-chip ${l.sp===liveVoiceLang?'on':''}" onclick="setLiveLang('${l.sp}',this)">${l.n.split(' ')[0]} ${l.c}</div>`).join('');
-}
-function setLiveLang(sp,el){liveVoiceLang=sp;document.querySelectorAll('.live-lang-chip').forEach(x=>x.classList.remove('on'));el.classList.add('on');}
-
-function startLive(e){
-  if(e)e.preventDefault();
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!SR){document.getElementById('liveText').textContent="Brauzeringiz ovozni qo'llab-quvvatlamaydi";return;}
-  navigator.mediaDevices.getUserMedia({audio:true}).then(stream=>{
-    stream.getTracks().forEach(t=>t.stop());
-    liveRec=new SR();liveRec.lang=liveVoiceLang;liveRec.continuous=true;liveRec.interimResults=true;
-    liveRec.onresult=e=>{let txt='';for(let i=e.resultIndex;i<e.results.length;i++)txt+=e.results[i][0].transcript;document.getElementById('liveText').textContent=txt;};
-    liveRec.onerror=e=>{document.getElementById('liveText').textContent='Xato: '+e.error;};
-    liveRec.start();
-    document.getElementById('holdBtn').classList.add('rec');
-    document.getElementById('holdBtn').textContent='●';
-    document.getElementById('liveText').textContent='Tinglayapman...';
-    document.getElementById('liveStatus').textContent='🎤 '+liveVoiceLang;
-    document.getElementById('liveOrb').classList.add('active');
-  }).catch(()=>{document.getElementById('liveText').textContent='Mikrofon ruxsati berilmadi';});
-}
-
-function stopLive(e){
-  if(e)e.preventDefault();
-  if(liveRec){liveRec.stop();liveRec=null;}
-  document.getElementById('holdBtn').classList.remove('rec');
-  document.getElementById('holdBtn').textContent='HOLD';
-  document.getElementById('liveOrb').classList.remove('active');
-  document.getElementById('liveStatus').textContent='';
-  setTimeout(async()=>{
-    const txt=document.getElementById('liveText').textContent;
-    if(txt&&txt!=='Tinglayapman...'&&txt!=='Bosib ushlab gapiring...'&&!txt.startsWith('Xato')&&!txt.startsWith('Mikrofon')){
-      document.getElementById('liveText').textContent='💭 Javob tayyorlanmoqda...';
-      try{
-        const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
-          method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_KEY},
-          body:JSON.stringify({model:curModel,messages:[{role:'system',content:AI_SYSTEM},{role:'user',content:txt}],max_tokens:300})
-        });
-        const data=await res.json();
-        if(data.choices?.[0]){
-          const reply=data.choices[0].message.content;
-          document.getElementById('liveText').textContent=reply.substring(0,100)+(reply.length>100?'...':'');
-          speakTxt(reply,liveVoiceLang);
-          liveHistory.unshift({q:txt,a:reply,time:new Date().toLocaleTimeString('uz-UZ',{hour:'2-digit',minute:'2-digit'})});
-          if(liveHistory.length>10)liveHistory.pop();
-          renderLiveHistory();
-          const chat=document.getElementById('chat1');
-          addMsg(chat,esc(txt),'user');addMsg(chat,md(esc(reply)),'ai');saveMem(txt,reply);
-        }else document.getElementById('liveText').textContent='Bosib ushlab gapiring...';
-      }catch(e){document.getElementById('liveText').textContent='Xato: '+e.message;}
-    }else document.getElementById('liveText').textContent='Bosib ushlab gapiring...';
-  },400);
-}
-
-function renderLiveHistory(){
-  document.getElementById('liveHistory').innerHTML=liveHistory.map(h=>`
-    <div class="live-hist-item">
-      <div class="live-hist-q">🎤 ${esc(h.q.substring(0,60))}${h.q.length>60?'...':''} <span style="color:#333">${h.time}</span></div>
-      <div class="live-hist-a">🤖 ${esc(h.a.substring(0,80))}${h.a.length>80?'...':''}</div>
-    </div>`).join('');
 }
 
 function saveMem(q,a){
