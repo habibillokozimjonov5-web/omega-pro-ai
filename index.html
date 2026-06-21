@@ -131,7 +131,7 @@ header{flex-shrink:0;height:58px;display:flex;justify-content:space-between;alig
     <div class="page-label">⬡ OMEGA CHAT</div>
     <div id="pRow1" class="img-preview-row"></div>
     <div class="chat-scroll"><div id="chat1" class="chat-box">
-      <div class="welcome"><h3>OMEGA CHAT</h3><p>ULTRA PRO · FAST · SMART · MINI<br>Rasmli savol · Suhbat xotirasi</p></div>
+      <div class="welcome"><h3>OMEGA CHAT</h3><p>Rasmli savol · Suhbat xotirasi</p></div>
     </div></div>
   </div>
 
@@ -187,12 +187,6 @@ header{flex-shrink:0;height:58px;display:flex;justify-content:space-between;alig
     <div class="plus-btn" id="plusBtn" onclick="togglePlus()">+</div>
     <div class="input-pill"><input type="text" id="in1" placeholder="Omega Chat ga yozing..." onkeydown="if(event.key==='Enter')send(1)"></div>
     <div class="send-btn" onclick="send(1)"><svg width="13" height="13" fill="black" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></div>
-  </div>
-  <div id="c1" class="chip-bar active">
-    <div class="chip on" onclick="selM(this,'llama-3.3-70b-versatile')">ULTRA PRO</div>
-    <div class="chip" onclick="selM(this,'llama-3.1-8b-instant')">ULTRA FAST</div>
-    <div class="chip" onclick="selM(this,'mixtral-8x7b-32768')">ULTRA SMART</div>
-    <div class="chip" onclick="selM(this,'gemma2-9b-it')">ULTRA MINI</div>
   </div>
   <div class="tabs-nav">
     <div class="tab-btn on" onclick="tabNav(1,this)">CHAT</div>
@@ -282,8 +276,6 @@ function tabNav(n,el){
   el.classList.add('on');
   document.querySelectorAll('.tools-row').forEach(x=>x.classList.remove('active'));
   if(n===1) document.getElementById('t1').classList.add('active');
-  document.querySelectorAll('.chip-bar').forEach(x=>x.classList.remove('active'));
-  if(n===1) document.getElementById('c1').classList.add('active');
   closePlus();
 }
 
