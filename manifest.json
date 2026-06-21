@@ -2,7 +2,7 @@
   "name": "OMEGA PRO AI",
   "short_name": "OMEGA PRO",
   "description": "OMEGA PRO AI — suniy intellekt yordamchisi bilan suhbatlashish ilovasi.",
-  "start_url": "./OMEGA-PRO-AI.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
