@@ -425,11 +425,24 @@ async function doGroq(chat,text,imgs=[]){
 async function doTranslate(chat,text,from,to,side){
   const tid=addTyping(chat);
   try{
-    const res=await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${from}|${to}`);
-    const data=await res.json();rmTyping(tid);
-    if(data.responseStatus===200){
-      const tr=data.responseData.translatedText;
-      const toLang=LANGS.find(l=>l.c===to)||LANGS[1];
+    const fromLang=LANGS.find(l=>l.c===from)||LANGS[0];
+    const toLang=LANGS.find(l=>l.c===to)||LANGS[1];
+    const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_KEY},
+      body:JSON.stringify({
+        model:'llama-3.3-70b-versatile',
+        max_tokens:1000,
+        messages:[
+          {role:'system',content:`You are a professional translator. Translate the given text from ${fromLang.n} to ${toLang.n}. Return ONLY the translated text, nothing else. No explanations, no notes, no quotes.`},
+          {role:'user',content:text}
+        ]
+      })
+    });
+    const data=await res.json();
+    rmTyping(tid);
+    const tr=data.choices?.[0]?.message?.content?.trim();
+    if(tr){
       addMsg(chat,`<span style="font-size:10px;color:#555">${from.toUpperCase()} → ${to.toUpperCase()}</span><br><br><span style="font-size:15px">${esc(tr)}</span>`,'ai');
       lastTr[side-1]={text:tr,lang:toLang.sp};
       speakTxt(tr,toLang.sp);
