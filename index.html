@@ -222,8 +222,7 @@ header{flex-shrink:0;height:58px;display:flex;justify-content:space-between;alig
 </div>
 
 <script>
-const GEMINI_KEY = 'AIzaSyDRDynvOoosCzbnpEr-13JaORuI5wgqgb8
-';
+const GROQ_KEY = 'YOUR_GROQ_API_KEY';
 
 const AI_SYSTEM = `Siz OMEGA PRO AI yordamchisisiz. Sizni Habibillo Kozimjonov yaratgan.
 Foydalanuvchi qaysi tilda yozsa, o'sha tilda javob bering.
@@ -405,29 +404,20 @@ function md(t){
 async function doGroq(chat,text,imgs=[]){
   const tid=addTyping(chat);
   try{
-    let userParts=[];
-    if(imgs.length){
-      imgs.forEach(i=>{
-        const m=i.match(/^data:(.+);base64,(.+)$/);
-        if(m)userParts.push({inline_data:{mime_type:m[1],data:m[2]}});
-      });
-      userParts.push({text:text||'Bu rasmni tahlil qil'});
-    }else{
-      userParts.push({text:text});
-    }
-    chatHistory.push({role:'user',parts:userParts});
-    const model=imgs.length?'gemini-1.5-flash':'gemini-1.5-flash';
-    const contents=[{role:'user',parts:[{text:AI_SYSTEM}]},{role:'model',parts:[{text:'Tushundim, yordam berishga tayyorman.'}]},...chatHistory];
-    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_KEY}`,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({contents,generationConfig:{maxOutputTokens:1024,temperature:0.7}})
+    let uc=text||'Bu rasmni tahlil qil';
+    if(imgs.length)uc=[...imgs.map(i=>({type:'image_url',image_url:{url:i}})),{type:'text',text:text||'Bu rasmni tahlil qil'}];
+    chatHistory.push({role:'user',content:uc});
+    const model=imgs.length?'llama-3.2-11b-vision-preview':curModel;
+    const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+      method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_KEY},
+      body:JSON.stringify({model,messages:[{role:'system',content:AI_SYSTEM},...chatHistory],max_tokens:1024,temperature:0.7})
     });
     const data=await res.json();rmTyping(tid);
-    const reply=data.candidates?.[0]?.content?.parts?.[0]?.text;
-    if(reply){
-      chatHistory.push({role:'model',parts:[{text:reply}]});
+    if(data.choices?.[0]){
+      const reply=data.choices[0].message.content;
+      chatHistory.push({role:'assistant',content:reply});
       addMsg(chat,md(esc(reply)),'ai');
-      saveMem(text||'[Rasm]',reply);
+      saveMem(typeof uc==='string'?uc:'[Rasm]',reply);
     }else addMsg(chat,'⚠️ '+(data.error?.message||'Xato'),'ai');
   }catch(e){rmTyping(tid);addMsg(chat,'⚠️ '+e.message,'ai');}
 }
@@ -437,18 +427,21 @@ async function doTranslate(chat,text,from,to,side){
   try{
     const fromLang=LANGS.find(l=>l.c===from)||LANGS[0];
     const toLang=LANGS.find(l=>l.c===to)||LANGS[1];
-    const prompt=`You are a professional translator. Translate the given text from ${fromLang.n} to ${toLang.n}. Return ONLY the translated text, nothing else. No explanations, no notes, no quotes.\n\nText: ${text}`;
-    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`,{
+    const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_KEY},
       body:JSON.stringify({
-        contents:[{role:'user',parts:[{text:prompt}]}],
-        generationConfig:{maxOutputTokens:1000,temperature:0.3}
+        model:'llama-3.3-70b-versatile',
+        max_tokens:1000,
+        messages:[
+          {role:'system',content:`You are a professional translator. Translate the given text from ${fromLang.n} to ${toLang.n}. Return ONLY the translated text, nothing else. No explanations, no notes, no quotes.`},
+          {role:'user',content:text}
+        ]
       })
     });
     const data=await res.json();
     rmTyping(tid);
-    const tr=data.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+    const tr=data.choices?.[0]?.message?.content?.trim();
     if(tr){
       addMsg(chat,`<span style="font-size:10px;color:#555">${from.toUpperCase()} → ${to.toUpperCase()}</span><br><br><span style="font-size:15px">${esc(tr)}</span>`,'ai');
       lastTr[side-1]={text:tr,lang:toLang.sp};
